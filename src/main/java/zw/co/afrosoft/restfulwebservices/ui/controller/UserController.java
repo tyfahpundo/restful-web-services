@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import zw.co.afrosoft.restfulwebservices.ui.model.request.UserDetailsRequestModel;
 import zw.co.afrosoft.restfulwebservices.ui.model.response.UserResponse;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -22,10 +24,10 @@ public class UserController {
         returnValue.setEmail("tyfah@gmail.com");
         returnValue.setUserId("263");
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(returnValue, HttpStatus.OK);
     }
     @PostMapping
-    public ResponseEntity<UserResponse> createUser(@RequestBody UserDetailsRequestModel userDetails){
+    public ResponseEntity<UserResponse> createUser(@Valid @RequestBody UserDetailsRequestModel userDetails){
         UserResponse returnValue = new UserResponse();
         returnValue.setFirstName(userDetails.getFirstName());
         returnValue.setLastName(userDetails.getLastName());
